@@ -1,0 +1,14 @@
+//linked list
+// Linked list implementation in C++
+
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+// Creating a node
+
+class Node {
+   public:
+  int value;
+  Node* next;
+};
