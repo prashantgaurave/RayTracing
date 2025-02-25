@@ -1,0 +1,2023 @@
+//linked list
+// Linked list implementation in C++
+
+#include <bits/stdc++.h>
+#include <iostream>
+using namespace std;
+
+// Creating a node
+
+class Node {
+   public:
+  int value;
+  Node* next;
+};
+
+int main() {
+  Node* head;
+  Node* one = NULL;
+  Node* two = NULL;
+  Node* three = NULL;
+
+  // allocate 3 nodes in the heap
+  one = new Node();
+  two = new Node();
+  three = new Node();
+
+  // Assign value values
+  one->value = 1;
+  two->value = 2;
+  three->value = 3;
+
+  // Connect nodes
+  one->next = two;
+  two->next = three;
+  three->next = NULL;
+
+  // print the linked list value
+  head = one;
+  while (head != NULL) {
+    cout << head->value;
+    head = head->next;
+  }
+}
+
+//C++ smartpointer
+#include <iostream>
+using namespace std;
+ 
+class SmartPtr {
+    int* ptr; // Actual pointer
+public:
+  
+    explicit SmartPtr(int* p = NULL) { ptr = p; }
+ 
+    // Destructor
+    ~SmartPtr() { delete ptr; }
+ 
+    // Overloading dereferencing operator
+    int& operator*() { return *ptr; }
+};
+ 
+int main()
+{
+    SmartPtr ptr(new int());
+    *ptr = 20;
+    cout << *ptr;
+    return 0;
+}
+
+//Multi thread
+
+#include <iostream>
+#include <thread>
+ 
+void thread_function()
+{
+    for(int i = 0; i < 10000; i++);
+        std::cout<<"thread function Executing"<<std::endl;
+}
+ 
+int main()  
+{    
+    std::thread threadObj(thread_function);
+    for(int i = 0; i < 10000; i++);
+    std::cout<<"Display From MainThread"<<std::endl;
+    threadObj.join();    
+    std::cout<<"Exit of Main function"<<std::endl;
+    return 0;
+}
+
+>>>> Deep copy Constructor
+
+#include<iostream>
+#include<cstring>
+using namespace std;
+class CopyConstructor
+{
+    char *s_copy;
+    public:
+    CopyConstructor (const char *str)
+    {
+        s_copy = new char[16];  //Dynamic memory alocation
+        strcpy(s_copy, str);
+    }
+    
+    CopyConstructor (const CopyConstructor &str)
+    {
+        s_copy = new char[16]; //Dynamic memory alocation
+        strcpy(s_copy, str.s_copy);
+    }
+    
+    void concatenate(const char *str)
+    {
+        strcat(s_copy, str); //Concatenating two strings
+    }
+
+    ~CopyConstructor()
+    { 
+        delete[] s_copy;
+    }
+
+    void display()
+    {
+        cout<<s_copy<<endl;
+    }
+};
+/* main function */
+int main()
+{
+    CopyConstructor c1("Copy");
+    CopyConstructor c2 = c1;    //copy constructor
+    c1.display();
+    c2.display();
+    c1.concatenate("Constructor");    //c1 is invoking concatenate()
+    c1.display();
+    c2.display();
+    return 0;
+}
+
+Find & Replace all sub strings – using STL
+#include <iostream>
+#include <string>
+void findAndReplaceAll(std::string & data, std::string toSearch, std::string replaceStr)
+{
+// Get the first occurrence
+size_t pos = data.find(toSearch);
+// Repeat till end is reached
+while( pos != std::string::npos)
+{
+// Replace this occurrence of Sub String
+data.replace(pos, toSearch.size(), replaceStr);
+// Get the next occurrence from the current position
+pos =data.find(toSearch, pos + replaceStr.size());
+}
+}
+int main()
+{
+std::string data = "Boost Library is simple C++ Library";
+std::cout<<data<<std::endl;
+findAndReplaceAll(data, "Lib", "XXX");
+std::cout<<data<<std::endl;
+return 0;
+}
+
+
+1. OOPS Concepts?
+Concepts are 
+	Class			 Encapsulation
+	Object			 Inheritance
+	Data Abstraction		 Polymorphism
+      Class and Object:
+	Class is logical construction and Object is a physical construction. Means when we create a class, memory is not allocated for class members. 
+At the time of creating object only memory can be allocated.
+	We can create no. of objects to a class.
+Ex: rose, Lilly, jasmine are no. of objects to a Flower class.
+	Class is a design .object is the creation from this design. In other words class is a type and object is instance of that type.
+	Class contains data members and member functions.
+	 Empty class size is 1byte.
+	Class is an expanded concept of a data structure: instead of holding only data, it can hold both data and functions.
+	An object is an instantiation of a class. In terms of variables, a class would be the type, and an object would be the variable.
+Data Abstraction:
+	Data abstraction is a process of representing the essential features without including implementation details.
+ Means there is no need to know the implementation of member function to the person who creating an object to that class.
+	Abstraction is hiding complexity.
+	Abstraction is a process of hiding unnecessary implementation information from user.
+Ex: index of the book.
+Data Encapsulation:
+	Data Encapsulation means binding of data and member functions in single unit of class. Here by using some access specifiers like private,
+ public and protected we can restrict the class members access from outside the class.
+	Encapsulation is hiding data from other classes.
+	Data encapsulation, also known as data hiding, is the mechanism whereby the implementation details of a class are kept hidden from the user.
+	Encapsulation is a process of hiding private implementation details from the public interface.
+Inheritance:
+	Inheritance means constructing a class from existed one means we can access that base class functionality in derived class.
+	Inheritance is a mechanism for building a new class types from existing class types.
+	Like for suppose am having class Emp i.e class Emp {};
+And Dept is derived class from Emp like class Dept: Emp {}; here the functionality of class Emp is accessible in class Dept.
+Here by default inheritance is private inheritance i.e Dept: private Emp {};
+	Access rights of derived classes from base class:
+
+Type of Inheritance
+ 	        Private	  Protected	 Public
+Private	     ---	      ---	     ---
+Protected	Private	  Protected	 Protected
+Public	   Private	  Protected	 Public
+
+
+Polymorphism:
+	Polymorphism means many forms, means application contains more than one function. 
+	Polymorphism means the ability to take more than one form. Which are having same name
+	Here two types of polymorphism are there, one is compile time polymorphism and another one is run-time polymorphism.
+ 
+ Compile-time Polymorphism:
+	Compile-time polymorphism we can implement function overloading and operator overloading.
+	Function overloading, application contains more than one function with same name, but they can differ with their no. 
+of parameters, type of parameters and order of parameter.
+	Here when we call a function, at the time of compilation only compiler will decide which function have to call.
+ This is also called as static binding (linking) or early binding.
+	Suppose when I am having some functions like void fun(int,int);
+void fun(float, float); here when we pass two integers to fun like fun(10,20); then first function will be called. 
+If we pass float type values like fun (10.5, 11.5) then second function will be called.
+	here return type was not  involved in function overloading means suppose when I am having two functions like, 
+int fun(int,int); float fun(int,int); here if we pass two integers to fun like fun(10,20) then compiler don’t know which function have to cal,
+ So “ambiguity” errors occurs. This way return type is not involved in function overloading. 
+	Like this we can overload some operators also.
+
+ Run-time Polymorphism:
+	In run-time polymorphism we can implement the virtual function mechanism. This is also called as late binding or dynamic binding (linking).
+	When we don’t know about implementation details of a function, then we can treat that function as virtual like class Emp{ virtual void fun();};
+	Here the person who implements a class by deriving from Emp can implement that function as their need. here overriding is done.
+For example: class Emp 
+{
+public:
+ virtual void fun();
+ }; 
+   Class Dept: public Emp
+   { 
+   public :
+   void fun();
+   };
+   Void main () {Emp *P; Dept obj; p=&obj; p->fun () ;}
+ Here at the time of creating an object, that class constructor can be called. So it can allocate memory for 
+ member variables of that class and it will provide code to construct virtual table.
+	So by using virtual mechanism we can call derived class function through base class pointer.
+
+2. Data Hiding and Encapsulation: 
+Data Hiding:
+	Data Hiding is the mechanism where the details of the class are hidden from the user.
+	The user can perform only a restricted set of operations in the hidden member of the class.
+	Data Hiding is also known as Encapsulation.
+	In object oriented programming most of the item data members is defined as private and member function will be defined as public.
+	The public members of the class can be accessed from inside of the class as well as from the outside of the class. 
+	The private members of the class can be accessed from inside of the class but cannot be accessed from 
+outside of the class. Thus private members remain hidden from outside of the class. thus the data hiding is implemented
+	Keeping the data members of class in private mode is called data hiding.
+
+Encapsulation:
+	Defining data members and member functions together within a class is referred as encapsulation.
+	Encapsulation is the process of combining data and function into a single unit called class.
+	Here by using some access specifiers like private, public and protected we can restrict the class members access from outside the class
+	Encapsulation is a powerful feature that leads to information hiding, abstract data type and friend function.
+	They encapsulate all the essential properties of the object that are to be created.
+	Using the method of encapsulation the programmer cannot directly access the class.
+
+
+4. Difference b/w reference and pointer?
+	In c language at the time of declaring reference variable only we have to assign the existed once.
+ Like int a; int &b=a; int &b;\\ error  , here “b” is  just created as a alias name to “a”, no other memory is allocated.
+	But in case of pointer concept, 4 bytes of memory can be memory allocated for pointers. Like int a; int *p; p=&a;
+	We can pass these references and pointers as parameters also.
+	No need to de-refer the reference variable, and we have to de-refer a pointer to display a value.  
+	Arithmetic operations cannot be performed for reference, whereas pointers can be perform arithmetic operations.
+
+Reference	                                 Pointer
+A reference is a const pointer. Once initialized a reference cannot be made to refer to another variable.A pointer can be re-assigned.
+Reference shares the same memory address	A pointer has it’s own memory address and size on the stack.
+Arithmetic operations cannot be performed	Arithmetic operations can be performed.
+Reference gets automatically de-referenced	In pointer we have to explicitly de-referenced
+Reference offer one level of indirection	We have pointer to pointer to pointer **p, Pointers can be assigned null.
+A pointer to a class/struct uses -> to access it members.
+ 
+
+5. Difference between abstract class and interface?
+Abstract class:
+	Abstract class is a class which contains at-least one only pure virtual function. 
+Pure virtual function means declaration initialize to zero. Like virtual void fun()=0;
+	We can’t create an object to abstract class.
+	Abstract class contains pure virtual functions (at-least one) and normal functions.
+	If pure virtual functions are not implemented in derived class of abstract class,
+ then also we cannot create object to derived class also.
+Abstract class ex:
+Class abc{
+ public:
+ virtual void fun()=0;
+ void fun2(); }; abc obj;// not possible
+Interface:
+	If a class contains only function declarations, then we can treat that class as interface. We can create object to interface.
+	In Interface, by default all functions are pure virtual functions. Interface only contains method declaration but cannot have any implementation. 
+Interface ex:
+Class abc{ public:
+ void fun1(); 
+ void fun2(); 
+ }; 
+ abc obj; //possible
+6. What is initialization list?
+     Definition:
+Initialization List is another or a better approach for initializing the member variables (and base class objects) 
+of a class upon construction of an instance of its own.
+	Initialization List is used to initialize both user defined data types (like embedded object of a 
+class) and also primitive/built-in data types (like int, char).
+	Initialization List can appear irrespective of the place the constructor is defined.
+	Initializing the member variables in the Initialization List is better than initializing them inside the body of the constructor of the class.
+	It is mandatory to initialize Reference Data Member in an Initialization List because it cannot exist without being initialized.
+	It is mandatory to initialize Constant Data Member in an Initialization List otherwise it would be constructed
+ with some junk values and we cannot initialize it later anywhere else. 
+	It is mandatory to construct and initialize, embedded class objects/base class objects in case of inheritance, 
+in an Initialization List, if they do not themselves have a zero-argument/default constructor provided.
+
+7. What is mutable variable?
+	To modify non static and non-constant variables inside constant methods, then that data member variable must be declared as 
+“mutable” in the class.
+Ex: class Sample
+{ 
+ const int a;
+ int b;
+ static int c;
+ Public:  Sample():a(10)
+ { 
+ b=0;
+ } 
+void fun()const 
+{ 
+//a=20; //not allowed //b=10; //not allowed c=30; //allowed 
+} 
+};
+int Sample::c;
+Void main()
+{ 
+const Sample obj; obj.fun(); 
+};
+ Here through const object only, we can access const functions.
+If int b; is mutable ,then fun() can allows that ‘b’ modification... mutable int b;
+
+	In function overloading const can be involved.
+Ex:  class Sample{ void fun()const{} void fun(){}}; void main(){ const Sample obj; abc ob; obj.fun();// const fun() will be called ob.fun(); }
+8. Method overloading and Method overriding?
+Method overloading:
+	Method overloading is done in compile time polymorphism.
+	Method overloading is a concept that allows multiple functions to share the same name,
+ but they can be differ with their no. of parameters, type of parameters and order of parameters.
+
+	return type was not  involved in function overloading means suppose when I am having two functions like, 
+int fun(int,int); float fun(int,int); here if we pass two integers to fun like fun(10,20) 
+then compiler don’t know which function have to cal, So “ambiguity” errors occurs. This way return type is not involved in function overloading.
+Method overriding:
+	Method overriding done in run time polymorphism.
+	In run-time polymorphism we can implement the virtual function mechanism. This is also called as late binding or dynamic binding (linking).
+	When we don’t know about implementation details of a function, then we can treat that function as virtual like class Emp{ virtual void fun();};
+	Here the person who implements a class by deriving from Emp can implement that function as their need. Here overriding is done.
+	Defining a function in the derived class with same name as in the base class is called overriding.
+                 overloading	                                             Overriding
+Method overloading is a static or compile time binding.	                     Method overriding is dynamic or run time binding.
+Overloading can occur without inheritance.	                                   Overriding can occur with inheritance.
+Overloading functions must differ in function .
+signatures i.e. no. of parameters, type of parameters and order of parameters	 Overriding function signatures must be same.
+Overloading functions are in same scope.	                                     Overriding functions are in different scopes.
+Overloading means having methods with same name but different signatures.	Overriding means rewriting the virtual method of the base class.
+
+
+Object Slicing in C++
+
+In C++, a derived class object can be assigned to a base class object, but the other way is not possible.
+
+
+class Base { int x, y; };
+  
+class Derived : public Base { int z, w; };
+  
+int main() 
+{
+    Derived d;
+    Base b = d; // Object Slicing,  z and w of d are sliced off
+}
+Object slicing happens when a derived class object is assigned to a base class object, additional attributes of a derived class object are sliced off to form the base class object.
+
+
+#include <iostream>
+using namespace std;
+  
+class Base
+{
+protected:
+    int i;
+public:
+    Base(int a)     { i = a; }
+    virtual void display()
+    { cout << "I am Base class object, i = " << i << endl; }
+};
+  
+class Derived : public Base
+{
+    int j;
+public:
+    Derived(int a, int b) : Base(a) { j = b; }
+    virtual void display()
+    { cout << "I am Derived class object, i = "
+           << i << ", j = " << j << endl;  }
+};
+  
+// Global method, Base class object is passed by value
+void somefunc (Base obj)
+{
+    obj.display();
+}
+  
+int main()
+{
+    Base b(33);
+    Derived d(45, 54);
+    somefunc(b);
+    somefunc(d);  // Object Slicing, the member j of d is sliced off
+    return 0;
+}
+Output:
+
+I am Base class object, i = 33
+I am Base class object, i = 45
+We can avoid above unexpected behavior with the use of pointers or references. Object slicing doesn’t occur when pointers or references
+to objects are passed as function arguments since a pointer or reference of any type takes same amount of memory.
+ For example, if we change the global method myfunc() in the above program to following, object slicing doesn’t happen.
+
+
+// rest of code is similar to above
+void somefunc (Base &obj)
+{
+    obj.display();
+}           
+// rest of code is similar to above
+Output:
+
+
+
+I am Base class object, i = 33
+I am Derived class object, i = 45, j = 54
+We get the same output if we use pointers and change the program to following.
+
+
+// rest of code is similar to above
+void somefunc (Base *objp)
+{
+    objp->display();
+}
+  
+int main()
+{
+    Base *bp = new Base(33) ;
+    Derived *dp = new Derived(45, 54);
+    somefunc(bp);
+    somefunc(dp);  // No Object Slicing
+    return 0;
+}
+Output:
+
+I am Base class object, i = 33
+I am Derived class object, i = 45, j = 54
+
+10. Types of Inheritance
+    Types of inheritance are: Single, Multiple, Multilevel, Hierarchical and Hybrid inheritance
+	Single: Its inheritance hierarchy where in one derived class inherits from one base class.
+	Multiple: Its inheritance hierarchy where in one derived class inherits from multiple base class(s)
+	Hierarchical: Its inheritance hierarchy where in multiple subclasses inherits from one base class.
+	Multilevel: Its inheritance hierarchy where in subclass acts as a base class for other classes.
+	Hybrid: The inheritance hierarchy that reflects any legal combination of other four types of inheritance.
+11. Explain all types of casting
+	It’s used to convert the type of a variable, function, object, expression or return value to another type.
+	There are 4 types of casting are present.
+
+Static_cast:  (To convert non polymorphic types)
+	It allows casting a pointer of a derived class to its base class and vice versa. This cast type uses information 
+    available at compile time to perform the required type conversion.
+	Other usage of the static_cast includes the conversion of int to enum, reference of type P& to Q&,
+    an object of type P to an object of type Q and a pointer to member to another pointer to member within the same class hierarchy.
+	Static_cast is not as safe as dynamic_cast, because it does not have the run time check, for example,
+    for ambiguous pointer, static_cast may return successful but a dynamic_cast pointer will fail.
+#include <iostream> 
+using namespace std; 
+int main() 
+{ 
+    float f = 3.5; 
+    int a = f; // this is how you do in C 
+    int b = static_cast<int>(f); 
+    cout << b; 
+} 
+Const_cast:  
+	This cast type is used to add to or remove the const-ness or volatile-ness of the expression.
+Ex:	
+Const int p=10;
+ int r = const_cast<int&> (p);
+
+
+dynamic_cast: (To convert polymorphic types.)
+	This cast is exclusively used with pointers and references to objects for class hierarchy navigation
+	It can be used to cast from a derived class pointer to a base class pointer (upcasting),
+    or cast a base class pointer to a derived class pointer (downcast).
+	dynamic_cast operator is part of the C++ run time type information (rtti) tally to the term dynamic instead of static,
+    hence it usage closely related to the polymorphic classes, classes which have at least one virtual function.
+	if the pointer being cast is not a pointer to a valid complete object of the requested type,
+    the value returned is a NULL pointer..
+
+ class Base 
+{
+public:
+    virtual ~Base(){};
+};
+class Der : public Base {};
+
+
+int main()
+{
+    Base* base = new Der;
+    Der* der = dynamic_cast<Der*>(base); // OK
+
+    return 0;
+}
+reintrepret_cast: (For type conversion of unrelated types)
+	This operator is used to convert any pointer to any other pointer type. 
+    It also can be used to convert any integral type to any pointer type and vice versa.
+	Can be used to convert for example, int* to char*, or classA to classB, 
+    which both class are unrelated classes, between two unrelated pointers, pointers to members or pointers to functions.
+	it converts a null pointer value to the null pointer value of the destination type
+
+// CPP code to illustrate the pointer reinterpret 
+#include <iostream> 
+using namespace std; 
+
+class A { 
+public: 
+	void fun_a() 
+	{ 
+		cout << " In class A\n"; 
+	} 
+}; 
+
+class B { 
+public: 
+	void fun_b() 
+	{ 
+		cout << " In class B\n"; 
+	} 
+}; 
+
+int main() 
+{ 
+	// creating object of class B 
+	B* x = new B(); 
+
+	// converting the pointer to object 
+	// referenced of class B to class A 
+	A* new_a = reinterpret_cast<A*>(x); 
+
+	// accessing the function of class A 
+	new_a->fun_a(); 
+	return 0; 
+} 
+
+
+12. Difference between Copy Constructor and Overloaded assignment operator.
+    The basic difference between copy constructor and assignment operator is that
+	The assignment operator is used to copy the values from one object to another already existing object.
+    The key words here “already exist”.
+	A copy constructor is a special constructor that initializes a new object from an existing object.
+	At the time of creating object, when we assign existed one, then copy constructor can be called. 
+    this is used to copy one object members to another object. 
+	By default compiler provides copy constructor but there shallow copying can be done.
+	If a class contains pointer members then we have to override copy constructor by doing deep copying.
+	In shallow copying address can be copied, so if we make any changes in one object pointer member data,
+    that can be effected to another object data.
+	So to eliminate this problem we have to allocate to memory and we have to copy that data.
+    When is copy constructor called?
+	When a function returns an object of that class by value, i.e.
+	When a object of that class is passed by value as an argument to a function.
+	When you construct an object based on another object of same class(Sample s1=s2)
+	When compiler generates a temporary object. 
+Overload assignment operator:
+	After creating two objects, if we are assigning one object to another object then overload assignment operator can be called. like abc obj1,obj2; 
+Obj1=obj2; // overload assignment operator 
+
+
+14. Virtual destructor?
+	Deleting a derived class object using a pointer to a base class that has a non-virtual destructor results in undefined behavior.
+To correct this situation, the base class should be defined with a virtual destructor. For example, following program results in undefined behavior.
+Ex:
+class Base{ public: Base(){ cout<<"Constructing Base";}
+virtual ~Base(){ cout<<"Destroying Base";} // this is a destructor };
+class Derive: public Base{ public: Derive(){ cout<<"Constructing Derive";}
+~Derive(){ cout<<"Destroying Derive";} };
+void main() { Base *basePtr = new Derive(); delete basePtr; }
+Output: Constructing Base, Constructing Derive, Destroying Derive, Destroying Base
+
+15. Explicit constructor?
+	C++ constructors that have just one parameter automatically perform implicit type conversion. 
+	To avoid implicit conversions we should declare one argument constructor as explicit by using “explicit” key word.
+	A conversion constructor declared with the explicit keyword. 
+The compiler doesn’t use an explicit constructor to implement an implied conversion of types
+	The explicit keyword can only be applied to in-class constructor declarations to explicitly construct an object.
+Ex: class sample {
+int a;
+ public: sample (){}
+ explicit sample(int x){
+a=x;
+} 
+Void fun1 (sample s)
+ { cout<<”fun1”;}
+};
+int main(){
+ sample obj;
+ obj.fun1(20);// calls fun1() sample obj1(10);// 
+calls one argument ctor sample obj2=60;// error bcoz one arg ctor is explicit }
+
+16. Deep copying and shallow copying?
+Shallow copying:
+	By default compiler provides copy constructor but there shallow copying can be done.
+	In shallow copying address can be copied, so if we make any changes in one object pointer member data
+ that can be affected to another object data i.e. chance to lose the data.
+	In shallow copying copies the member values from one object into another object data, i.e. member wise copying is done.
+	Shallow copy points to the same location in memory as “source”.
+	Shallow copy is similar to call by reference, in call by reference both formal, 
+actual parameters of function refer to same memory location and value.
+Deep Copying:
+	So to eliminate problem in shallow copying, we have to allocated to memory and we have to copy that data.
+	A deep copy creates a copy of the dynamically allocated objects too. 
+You would need to use a copy constructor and overload an assignment operator for this.
+	Deep copies duplicate everything. Copies the member values from one object into another object, any pointer object are duplicated and deep copied.
+	Deep copy points to different location in memory, but the contents are same.
+	Deep copy is similar to call by value. In call by value both actual & formal parameters of a 
+function refers to different memory location but having the same value.
+
+17.  What is a dangling pointer?
+	Suppose we have two pointer variables which are initializing same memory.
+	If we delete one pointer using delete operator, then that data & pointer will be 
+destroyed but the second pointer refers the same address but there is no data at that address i.e. dangling pointer. 
+Ex:
+void main() { Int *ptr = new int; Int *ptr2 = ptr; Delete ptr;
+   	Cout<< *ptr2; //Here ptr2 is dangling pointer, so application will be crashed. }
+
+18. Memory leak?
+	Anywhere in the application, if we assign memory dynamically by using new operator, 
+we have the responsibility to de-allocate that heap memory. If we are not de-allocating using delete operator, memory leak occurs.  
+Ex: Void fun () {Int *ptr = new int; //memory allocated on heap is not freeing, so leaked.} Void main () {fun () ;}
+To avoid this, we have to destroy ptr by using delete operator.
+
+19. What is a Single ton class?
+	Singleton class is a design pattern in which only one instance of the class can be present at any given time.
+	Singleton design pattern ensure that a class has only one instance, 
+and provide a global point of access to it. 
+That means when creating for the first time we allow one instance creation and from then on once 
+the instance already exists the same instance is returned so that no new instance is created.
+Ex: #include <iostream>
+using namespace std;
+class Singleton {
+   static Singleton *instance;
+   int data;
+   // Private constructor so that no objects can be created.
+   Singleton() {
+      data = 0;
+   }
+   public:
+   static Singleton *getInstance() {
+      if (!instance)
+      instance = new Singleton;
+      return instance;
+   }
+
+   int getData() {
+      return this -> data;
+   }
+   void setData(int data) {
+      this -> data = data;
+   }
+};
+
+//Initialize pointer to zero so that it can be initialized in first call to getInstance
+Singleton *Singleton::instance = 0;
+int main(){
+   Singleton *s = s->getInstance();
+   cout << s->getData() << endl;
+   s->setData(100);
+   cout << s->getData() << endl;
+   return 0;
+}
+ 
+
+Factory method is a creational design pattern, i.e., related to object creation.
+ In Factory pattern, we create object without exposing the creation logic to client and the client use the same common
+ interface to create new type of object.
+The idea is to use a static member-function (static factory method) which creates & returns instances, 
+hiding the details of class modules from user.
+
+A factory pattern is one of the core design principles to create an object, allowing clients to create objects of a library(explained below) 
+in a way such that it doesn’t have tight coupling with the class hierarchy of the library.
+
+What is meant when we talk about library and clients?
+A library is something which is provided by some third party which exposes some public APIs and clients make calls to 
+those public APIs to complete its task. A very simple example can be different kinds of Views provided by Android OS.
+
+create a static (or factory) method. Let us see below code.
+
+
+// C++ program to demonstrate factory method design pattern 
+#include <iostream> 
+using namespace std; 
+  
+enum VehicleType { 
+    VT_TwoWheeler,    VT_ThreeWheeler,    VT_FourWheeler 
+}; 
+  
+// Library classes 
+class Vehicle { 
+public: 
+    virtual void printVehicle() = 0; 
+    static Vehicle* Create(VehicleType type); 
+}; 
+class TwoWheeler : public Vehicle { 
+public: 
+    void printVehicle() { 
+        cout << "I am two wheeler" << endl; 
+    } 
+}; 
+class ThreeWheeler : public Vehicle { 
+public: 
+    void printVehicle() { 
+        cout << "I am three wheeler" << endl; 
+    } 
+}; 
+class FourWheeler : public Vehicle { 
+    public: 
+    void printVehicle() { 
+        cout << "I am four wheeler" << endl; 
+    } 
+}; 
+  
+// Factory method to create objects of different types. 
+// Change is required only in this function to create a new object type 
+Vehicle* Vehicle::Create(VehicleType type) { 
+    if (type == VT_TwoWheeler) 
+        return new TwoWheeler(); 
+    else if (type == VT_ThreeWheeler) 
+        return new ThreeWheeler(); 
+    else if (type == VT_FourWheeler) 
+        return new FourWheeler(); 
+    else return NULL; 
+} 
+  
+// Client class 
+class Client { 
+public: 
+  
+    // Client doesn't explicitly create objects 
+    // but passes type to factory method "Create()" 
+    Client() 
+    { 
+        VehicleType type = VT_ThreeWheeler; 
+        pVehicle = Vehicle::Create(type); 
+    } 
+    ~Client() { 
+        if (pVehicle) { 
+            delete[] pVehicle; 
+            pVehicle = NULL; 
+        } 
+    } 
+    Vehicle* getVehicle()  { 
+        return pVehicle; 
+    } 
+  
+private: 
+    Vehicle *pVehicle; 
+}; 
+  
+// Driver program 
+int main() { 
+    Client *pClient = new Client(); 
+    Vehicle * pVehicle = pClient->getVehicle(); 
+    pVehicle->printVehicle(); 
+    return 0; 
+} 
+Output:
+
+I am three wheeler
+In the above example, we have totally decoupled the selection of type for object creation from Client.
+ The library is now responsible to decide which object type to create based on an input. 
+ Client just needs to make call to library’s factory Create method and pass the type it 
+ wants without worrying about the actual implementation of creation of objects.
+
+20. Exception handling?
+Definition: An exception is an event, which occurs during the execution of a program that disrupts the normal flow of the program's instructions. 
+An exception can occur for many different reasons, including the following:
+	Inability to open a file.
+	Exceeding the bounds of an array.
+	Attempting to initialize an object to an impossible value.
+	Falling short of memory.
+Exceptions provide a way to transfer control from one part of a program to another. 
+C++ exception handling is built upon three keywords: try, catch, and throw.
+•	throw: A program throws an exception when a problem shows up. This is done using a throw keyword.
+•	catch: A program catches an exception with an exception handler at the place in a 
+program where you want to handle the problem. The catch keyword indicates the catching of an exception.
+•	try: A try block identifies a block of code for which particular exceptions will be activated. It's followed by one or more catch blocks.
+
+   Try
+   {Throw exception} catch ( ExceptionName e1 )
+         {// catch block} catch ( ExceptionName e2 ){ // catch block }
+21. What is a stack unwinding?
+	The process of removing function entries from function call stack at run time is called Stack Unwinding. 
+Stack Unwinding is generally related to Exception Handling.
+	Stack unwinding is a process of calling all destructors for all automatic objects constructed at run time when an exception is thrown. 
+Destructors are called between the places where the exception was thrown and where it is caught.
+	If an exception is thrown during construction of an object consisting of sub objects or array elements,
+ destructors are only called for those sub objects or array elements successfully constructed before the exception was thrown.
+ A destructor for a local static object will only be called if the object was successfully constructed.
+	If during stack unwinding a destructor throws an exception and that exception is not handled, the terminate () function is called.
+
+22. How to restrict object assignment / copying?
+To restrict copying, a C++ class needs to declare a copy constructor and an assignment operator (operator=), In private access specifier block like 
+class Sample{ private: sample( const sample &obj);// restrict copy constructor
+Sample & operator=(const sample &obj) ;// restrict overload assignment operator };
+By default C++ allows copying. For any class that doesn’t declare its own, 
+the C++ compiler will provide a default copy constructor and a default assignment operator.
+Declare a copy constructor and an assignment operator so the compiler won’t provide the default versions
+ but make both methods private and don’t provide implementations.
+23. How to create non inheritable class?
+Inherit one class from base and also make the derived class friend of it base, because if we didn’t do it then,
+ we can’t inherit the class from another class whose constructor or destructor is private. 	
+Template<typename t>
+Class MakeFinal
+{Private:
+~MakeFinal(){ };
+Friend T ;};
+Don’t forget to virtually inherit your final class from this class to make sure this class becomes virtual base class.
+ And pass your final class name as a template parameter so your class becomes friend of this and can call the constructor of this class.
+Class FinalClass: virtual public MakeFinal<FinalClass>{ };
+
+24. What is template?
+	Template is a mechanism that makes it possible to use one function or class to handle different data types.
+	The templates declared for function called function templates.
+	The templates declared for class called class templates.
+	Templates can be considered as a kind of macros.
+	Templates are generic types.
+Advantage: decrease in work when code is repeated.
+Disadvantage: increase of size after compiling.
+25. Explain template specialization
+	The idea of template specialization is to override the default template implementation to handle a particular type in a different way.
+	In many cases when working with templates, you will write one generic version for all possible data types and leave it at that .
+Ex:	template <class T> void myswap(T &x,T &y){
+T temp(x); //temp = x;
+x = y; y = temp ;}
+template<> void myswap(char *&s1,char *&s2){ 
+char *temp; temp = s1;
+	s1 = s2; s2 = temp ;} 
+void main() { int a = 10, b= 20; myswap(a,b);
+	 cout<<" a :"<<a<<endl; cout<<" b :"<<b<<endl;
+ float f1 = 3.45f, f2=5.4f;  myswap(f1,f2);
+	 cout<<" f1 :"<<f1<<endl; cout<<" f2 :"<<f2<<endl;
+ char *st1 = "Hello"; char *st2 = "Hi"; myswap(st1,st2);
+	 cout<<" st1 :"<<st1; cout<<" st2 :"<<st2; }
+26. What is smart pointer (auto_ptr)?
+	A Smart Pointer is a C++ object that acts like a pointer, but additionally deletes the object when it is no longer needed.
+	Smart pointers are objects which behave like pointers but do more than a pointer. 
+	These objects are flexible as pointers and have the advantage of being an object (like constructor and destructors called automatically).
+Consider an example:
+class Person { int age; char* pName; public: Person(): pName(0),age(0){} 
+    	 Person(char* pName, int age): pName(pName), age(age){ } ~Person(){ } };
+     	void main(){ Person* pPerson  = new Person("xxx", 25); pPerson->Display();
+   	 delete pPerson; }
+Now look at this code, every time I create a pointer, I need to take care of deleting it. This is exactly what I want to avoid.
+ I need some automatic mechanism which deletes the pointer.
+     	void main() { SP p(new Person("Scott", 25)); p->Display();
+    // Dont need to delete Person pointer.. }
+We have created an object of class SP which holds our Person class pointer. Since the destructor of the
+ SP class will be called when this object goes out of scope, it will delete the Person class pointer (as its main responsibility); 
+ hence we don’t have the pain of deleting the pointer.
+class SP{ private: Person*    pData; // pointer to person class public:
+   	 SP(Person* pValue) : pData(pValue) { }
+  	  ~SP(){ // pointer no longer required   delete pData; }  };
+This class is our smart pointer class. The main responsibility of this class is to hold a pointer to
+ the Person class and then delete it when its destructor is called.
+27. Explain about compilation, linking and execution
+      Compiling:
+You cannot directly execute the source file. To run on any computer system, the source file must be 
+translated into binary numbers understandable to the computer's Central Processing Unit. 
+At compile time the program are contagiously scan for any syntax or sematic errors.
+After compilation the source file convert into “.obj”(object) file and linking part will be executed.
+      Linking:
+After compiling the header file and related another files are attaches with compiled program file and create
+ a lot of link between function and their related header file, it’s called linking.
+      Execution:
+At end of compilation and linking part the program really prepare to execute for use where
+ in this part “.obj” file convert into “.exe” file its called execution of the program. 
+28. Explain about Vectors?
+	Vectors are sequence containers representing arrays that can change in size.
+	Internally, vectors use a dynamically allocated array to store their elements.
+	vector containers may allocate some extra storage to accommodate for possible growth,
+ and thus the container may have an actual capacity greater than the storage strictly needed to contain its elements
+Fast insertion at end, and allow random access. 
+	Vector is a dynamically growing array. Vector defalut size is 10 bytes.
+	Vector is threading safe. Vector grows by its size twice and vector is synchronized. 
+29. Difference b/w Vector Vs List?
+vector:
+	Contiguous memory.
+	Pre-allocates space for future elements, so extra space required beyond for the elements themselves.
+	Each element only requires the space for the element type itself (no extra pointers).
+	Can re-allocate memory for the entire vector any time that you add an element.
+	Insertions at the end are constant, amortized time, but insertions elsewhere are a costly O(n).
+	Erasures at the end of the vector are constant time, but for the rest it's O(n).
+	You can randomly access its elements.
+	Iterators are invalidated if you add or remove elements to or from the vector.
+	You can easily get at the underlying array if you need an array of the elements.
+List:
+	Non-contiguous memory.
+	No pre-allocated memory. The memory overhead for the list itself is constant.
+	Each element requires extra space for the node which holds the element, including pointers to the next and previous elements in the list.
+	Never has to re-allocate memory for the whole list just because you add an element.
+	Insertions and erasures are cheap no matter where in the list they occur.
+	It's cheap to combine lists with splicing.
+	You cannot randomly access elements, so getting at a particular element in the list can be expensive.
+	Iterators remain valid even when you add or remove elements from the list.
+	If you need an array of the elements, you'll have to create a new one and add them all to it, since there is no underlying array.
+30. What is memcpy and memmove?
+Memcpy():
+	memcpy() is Function.
+	memcpy() copies bytes of data between memory blocks. 
+	This function doesn't care about the type of data being copied
+	it simply makes an exact byte-for-byte copy. 
+	The function prototype is
+         void *memcpy(void *dest, void *src, size_t count);
+The arguments dest and src point to the destination and source memory blocks. 
+Count specifies the number of bytes to be copied.The return value is dest. 
+	If the two blocks of memory overlap, the function might not operate properly. 
+Some of the data in src might be overwritten before being copied.
+	Memcpy just copies source to destination. Memcpy is faster.
+	If the array is overlaps the behavior of memcpy is undefined.
+memmove(): 
+	memmove() is very much like memcpy(), copying a specified number of bytes from one memory block to another. 
+	It's more flexible, however, because it can handle overlapping memory blocks properly.
+ Because memmove() can do everything memcpy() can do with the added flexibility of dealing with overlapping blocks.
+	The function prototype is
+void *memmove(void *dest, void *src, size_t count);
+dest and src point to the destination and source memory blocks, and count specifies the number of bytes to be copied. The return value is dest. 
+If the blocks overlap, this function ensures that the source data in the overlapped region is copied before being overwritten.
+	Memmove() copies from source to destination, 
+if buffer overlap, every character is read before another character is written to the same location.
+31. Difference b/w memcpy and strcpy?
+	memcpy can copy null bytes also if the size of memory is given. Whereas strcpy will stop copying if it encounters NULL Byte,
+ since it consider NULL as a terminating character. 
+	Strcpy usually accepts the char* as an argument but the memcpy accepts the void * as an argument.
+	strcpy() which copies n bytes. It is almost identical to memcpy(),
+ with the difference that it adds null termination at the end of the target string.
+	if we want to copy two integer arrays or some other memory which are not strings we can use memcpy.
+ strcpy/strncpy can be used for integer copies after typecasting but the behavior is unpridictable.
+Consider example:
+void main() { char s[5]={'s','a','\0','c','h'}; char p[5]; char t[5];
+         strcpy(p,s); memcpy(t,s,5);
+         printf("sachin p is [%s], t is [%s]",p,t); }
+Output sachin p is [sa], t is [sa]
+32. What is a composition, aggregation and association?
+Composition:
+	The process of building complex objects from simpler ones is called composition (also known as object composition).
+	Composition is used for objects that have a has-a relationship to each other. When a composition is destroyed, 
+all of the sub objects are destroyed as well.
+Ex: a car has-a metaframe, has-a engine, has-a body.
+A pc has-a cpu, has-a motherboard, has-a ram.
+	Composition is creating an object of an existing class with in another class.
+	Compostion promotes reusability by creating an object of an existing class with in another class.
+Ex: class money{}
+Class bank{ money obj;// embedded object}
+	Composition is achieved by adding declaration of object of one class in other object.
+
+Aggregation:
+	An aggregation is a specific type of composition where no ownership between the complex object and the subobjects is implied.
+	When an aggregate is destroyed, the subobjects are not destroyed.
+Let’s take an example of Department and teacher. A single teacher cannot belongs to multiple departments,
+ but if we delete the department teacher object will not destroy.
+Association:
+	Association is a relationship where all object have their own lifecycle and there is no owner. 
+Let’s take an example of Teacher and Student.
+ Multiple students can associate with single teacher and single student can associate with multiple teachers but 
+ there is no ownership between the objects and both have their own lifecycle. Both can create and delete independently. 
+ This relationship is called the “Association” relationship.
+	It can be implemented by sending messages from one object to another.
+	Association doesn’t involve any type of containment.
+
+ 	composition	aggregation	association
+owner	Single owner	Single owner	No owner
+lifetime	Owner’s lifetime	Have their own life time	Have their own life time
+Child object	Child object belong to single parent. 	Child object belong to single parent.	Child object all are independent.
+
+33. Difference b/w c++ struct and class?
+structure	class
+Structure default to public member access	class default to private member access
+Public base class inheritance	Private base class inheritance
+Size of empty structure is 1 bytes	Size of empty class is 1 byte
+There is no term like ctor, dtor in structure	For class compiler provides default if u don’t provides 
+Structure Doesn’t provide data hiding 	Class provide data hiding in encapsulation
+Structure keyword is struct.	Class keyword is class.
+
+
+
+
+
+
+
+
+
+Cpp structure	C structure
+Supports oops concepts 	Doesn’t supports oops concepts
+Padding is possible 	Padding is not possible
+Size of empty structure is 1 bytes	Size of empty structure 0 bytes
+We can restrict member variables from outside the structure by using private access specifier
+	We can’t restrict member variables from outside the structure.
+
+34. Difference b/w pop and oop?
+The basic difference between Procedure Oriented Programming and Object Oriented Programming are as follows:
+Procedure Oriented Programming (POP)
+	Main program is divided into small parts depending on the functions.
+	The Different part of the program connects with each other by parameter passing & using operating system.
+	Every function contains different data.
+	Functions get more importance than data in program.
+	Most of the functions use global data.
+	Same data may be transfer from one function to another
+	There is no perfect way for data hiding.
+	Functions communicate with other functions maintaining as usual rules.
+	More data or functions can not be added with program if necessary. For this purpose full program need to be change.
+	To add new data in program user should be ensure that function allows it.
+	Top down process is followed for program design.
+	Example: Pascal, Fortran
+Object Oriented Programming (OOP)
+	Main program is divided into small object depending on the problem.
+	Functions of object linked with object using message passing.
+	Data & functions of each individual object act like a single unit.
+	Data gets more importance than functions in program.
+	Each object controls its own data.
+	Data does not possible transfer from one object to another.
+	Data hiding possible in OOP which prevent illegal access of function from outside of it. This is one of the best advantages of OOP also.
+	One object link with other using the message passing.
+	More data or functions can be added with program if necessary. For this purpose full program need not to be change.
+	Message passing ensure the permission of accessing member of an object from other object.
+	Bottom up process is followed for program design.
+	Example: C++, Java.
+35. Memory layout of “c” program?
+Memory representation of C program consists of following sections.
+	Text segment
+	Initialized data segment
+	Uninitialized data segment
+	Stack
+	Heap
+ 
+Text Segment:
+A text segment, also known as a code segment or simply as text. This contains executable instructions.
+ As a memory region, a text segment may be placed below the heap or stack in order to prevent heaps and stack overflows from overwriting it.
+
+Initialized data segment:
+Initialized data segment, usually called the Data Segment. A data segment is a portion of virtual address s,
+ which contains the global variables and static variables that are initialized by the programmer.
+Ex: static int i = 10 will be stored in data segment and global int i = 10 will also be stored in data segment.
+
+Uninitialized data segment:
+Uninitialized data starts at the end of the data segment and contains all global variables and static variables that are initialized to zero.
+  
+  Stack:   Where automatic variables are stored, along with information that is saved each time a function is called.
+  Heap:   Heap is the segment where dynamic memory allocation usually takes place.
+
+36. Explain about storage classes?
+	Storage classes are 
+	Automatic
+	Static
+	Extern
+	 register.
+
+	Automatic
+Life time – within the function only
+Keyword- auto
+Visibility- local
+Storage- stack 
+Initial value- garbage value
+	Static
+Life time – throughout the application
+Keyword- static
+Visibility- global
+Storage- stack(data segment)
+Initial value- zero
+	Extern
+Life time – throughout the application
+Keyword- Extern
+Visibility- global
+Storage- stack(data segment)
+Initial value- zero
+	Register
+Life time – within the function only
+Keyword- register
+Visibility- local
+Storage- CPU register
+Initial value- garbage
+37. How to create the file scope variable?
+static int nValue; // file scoped variable
+float fValue; // global variable
+int main(){
+    double dValue; // local variable}
+File scoped variables act exactly like global variables.
+
+38. Difference b/w malloc() and new?
+	Malloc() and new both are dynamic allocation of memory ie at run time.
+	Malloc () is a function, while new is an operator.
+	We can’t overload in malloc function, we can overload new operator.
+	If we allocate memory dynamically by using malloc, we have to deallocate by using free() function.
+ While in case of new, we have to deallocate by using delete operator. 
+	Malloc will not call constructor if we create class object using malloc. While in case of “new” class constructor will be called.
+	In case of malloc typecasting is going on ,while in case of new no typecasting  is there.
+	While using malloc, if there is not sufficient memory is available,then NULL can assigned to that pointer.
+ While in case of new exception raises.
+	Using malloc ,there is need to include stdlib.h header file, no need to include any header file incase of new.
+
+
+39. Difference between Malloc() and Calloc()?
+	Malloc() and calloc() both are dynamic allocation of memory ie at run time. The difference is that 
+calloc initializes the allocated memory to 0 or Null while malloc contains garbage values.
+	Both are requires type-casting. 
+	malloc() takes a single argument (memory required in bytes), while calloc() needs two arguments.
+ptr_var= (cast_type *)malloc(Size_in_bytes);
+ptr_var= (cast_type *)calloc(no_of_blocks , size_of_each_block);
+	malloc() does not initialize the memory allocated, while calloc() initializes the allocated memory to ZERO. 
+	malloc() function reserves a contiguous memory block, while calloc() function reserves a block of memory.
+// C program to demonstrate the use of calloc() 
+// and malloc() 
+
+#include <stdio.h> 
+#include <stdlib.h> 
+  
+int main() 
+{ 
+   int *arr; 
+     
+   // malloc() allocate the memory for 5 integers 
+   // containing garbage values 
+   arr = (int *)malloc(5 * sizeof(int)); // 5*4bytes = 20 bytes 
+     
+   // Deallocates memory previously allocated by malloc() function 
+   free( arr ); 
+     
+   // calloc() allocate the memory for 5 integers and 
+   // set 0 to all of them 
+   arr = (int *)calloc(5, sizeof(int)); 
+     
+   // Deallocates memory previously allocated by calloc() function 
+   free(arr); 
+  
+   return(0); 
+}
+
+
+40. Difference b/w MACRO and INLINE functions?
+      MACRO:
+	It’s a pre-define string composed of one or more statements.
+	It’s preprocessor command, it can be executed at pre-Compilation time 
+	Syntax: 
+	#define <macro name> <macro expression>
+For example,
+	#define COUNT 100
+Note: The pre processor replaces the macro ‘COUNT’ in the program with 100.
+      Advantages: 
+	Macros works similar to a function, but its execution time is faster than function.
+Disadvantages:
+	Macros are not suitable for arithmetic operations.
+	Macros simply substitutes value without performing calculation.
+	Macros type checking is not there.
+#define SQUARE (x) x*x
+If we call SQUARE (5+5) 
+Result will be 35, why because macro directly substitutes the value in case of
+ 	5+5 * 5+5=35
+INLINE:
+	Inline function can be replaced at compile time.
+	Inline function body is inserted in place of the function call statement during the compilation process.
+	If we declare one function as inline, compiler can treat that function whether it is inline or not. 
+That is depends on that inline function code (size).
+	If there is need to take the function Implemented outside the class as inline function, 
+then we should declare that function with a keyword inline.
+ 	Like  inline void somefunction();
+Advantages:
+	By def all functions which are implemented inside a class are inline.
+	Can perform all arithmetic operations.
+	Inline functions provides type checking
+Disadvantages:
+	If inline function having any loop then complier won’t treat as inline.
+ 41. Explain Extern “C”?
+	Extern “C” is keyword.
+	To avoid the name mangling or decoration. It means different names are given to the different versions of an overloaded function.
+	Name mangling is complier dependent. Different complier may provide different name mangling functions.
+	Compiler mangles the name as per type, order and no. of args.
+
+42. Find loop in linked list?
+In the best method to detect a cycle in a linked list, we do the following,
+	Use Floyd's Cycle-Finding Algorithm and identify a position within the cycle in a linked list.
+	Count the size of the cycle in the linked list
+	Position one pointer at the beginning of the list and another 'k' (where k is the size of the cycle) positions away.
+	On iteration they meet at the beginning of the cycle.
+Note: Floyd’s cycle – finding algorithm is an efficient algorithm for detecting and finding cycles in sequences.
+Ex: 
+#include<stdio.h> #include<stdlib.h>
+ /* Link list node */ struct node{ int data; struct node* next; };
+ void push(struct node** head_ref, int new_data) { /* allocate node */
+  struct node* new_node = (struct node*) malloc(sizeof(struct node));
+ /* put in the data  */  new_node->data  = new_data;
+ /* link the old list off the new node */  new_node->next = (*head_ref);
+/*move the head to point to the new node */ (*head_ref) =new_node;}
+int detectloop(struct node *list) 
+{  struct node  *slow_p = list, *fast_p = list;
+    while(slow_p && fast_p && fast_p->next ) {
+    slow_p = slow_p->next; fast_p  = fast_p->next->next;
+    if (slow_p == fast_p) {  printf("Found Loop"); return 1; } }
+    return 0;
+}
+ /* Drier program to test above function*/
+int main() { /* Start with the empty list */ struct node* head = NULL;
+push(&head, 20); push(&head, 4); push(&head, 15); push(&head, 10);
+ /* Create a loop for testing */ head->next->next->next->next = head;
+  detectloop(head);
+ getchar();
+}
+Time Complexity: O(n)
+Space Complexity: O(1)
+43. Code for reversing a linked list? 
+#include<iostream> using namespace std;
+class Node { int data; Node *next; friend class List; };
+class List { Node *first,*last;
+public:List() { first = last = NULL; }
+void Add(int n) { Node *curr = new Node; curr->data = n; curr->next = NULL;
+if ( first == NULL ) first = last = curr;
+else { last->next = curr; last = curr; } }
+void reverse() { Node *prev   = NULL; Node *current = first; Node *next;
+while (current != NULL) { next  = current->next; current->next = prev;  
+prev = current; current = next; }
+first = prev; }
+void display() { Node *temp = first; 
+while(temp != NULL) { cout<<"   "<<temp->data; temp = temp->next; } }
+};
+Void main ()
+ {
+ List obj;
+ obj.Add(10);
+ obj.Add(20);
+ obj.Add(30);
+ obj.Add(40);
+obj.display();
+ obj.reverse();
+ cout<<"\n reverse :"; obj.display(); 
+ }
+44. Explain about tree data structure inorder, preorder and post order?
+   struct tree { int data; struct NODE, *left, *right; }
+	typedef struct node;
+	void inorder(node * tree)
+	{
+	 if(root!=null) 
+	inorder(tree->leftchild);
+	 printf("%d",tree->data); 
+	inorder(tree->rightchild); 
+	}
+	void preorder(node * tree)
+	{
+	if(root!=null)
+	printf("%d",tree->data);
+	preorder(((tree->leftchild);
+	preorder(((tree->rightchild);}
+	void postorder(node * tree)
+	{
+	if(root!=null)
+	postorder(tree->leftchild);
+	postorder(tree->rightchild);
+	    printf("%d",tree->data);
+   }
+ Algorithm inorder(T, v)
+  	 Input: A binary tree T and a node v of T.
+   	Output: Depends on the action performed on a visit to a node.
+if T.hasLeft(v)
+         	inorder(T, T.left(v))   // recursively traverse left subtree
+         	visit node v
+             if T.hasRight(v)
+         	inorder(T, T.right(v))  // recursively traverse right subtree
+	Algorithm preorder(T, v)
+  	 Input: A binary tree T and a node v of T.
+   	Output: Depends on the action performed on a visit to a node.
+	visit node v
+              if T.hasLeft(v)
+         	preorder(T, T.left(v))   // recursively traverse left subtree
+             if T.hasRight(v)
+         	preorder(T, T.right(v))  // recursively traverse right subtree
+	Algorithm postorder(T, v)
+	   Input: A binary tree T and a node v of T.
+	   Output: Depends on the action performed on a visit to a node.
+	if T.hasLeft(v)
+	    postorder(T, T.left(v))   // recursively traverse left subtree
+	 if T.hasRight(v)
+	    postorder(T, T.right(v))  // recursively traverse right subtree
+	    visit node v
+45. Write a code for no. of repeated words in a sentence?
+#include <iostream> 
+#include <sstream>
+ #include <string> 
+#include <map>
+int main() 
+{ 
+// The test string std::string str("woo coo woo poo noo chho");
+     	// Count the number of occurrences for each word
+    	std::string word;
+    	std::istringstream iss(str);
+   	std::map<std::string, std::size_t> occurrences;
+   	while (iss >> word) ++occurrences[word];
+    	// Print the results
+    	for (std::map<std::string, std::size_t>::iterator it = occurrences.begin(); 
+        	 it != occurrences.end(); ++it) 
+{
+ std::cout << "Word: " << it->first << "\t Occurrences: " << it->second << std::endl; 
+}
+ std::cin.get();
+ }
+output :
+ // Word: chho    Occurrences: 1 
+ // Word: coo   	   Occurrences: 1  
+ // Word: noo      Occurrences: 1  
+ // Word: poo      Occurrences: 1   
+// Word: woo      Occurrences: 2
+
+46. What is the advantage of reference against pointer?
+Advantages of using references over pointers are as follows.
+	The reference syntax is simpler.
+	References are safe as they always point to a valid address, while pointers can be invalid 
+and cause fatal errors due to uninitialized, out-of-bound addresses or wrong type-casting.
+	References are useful for copy constructors and overloaded operators.
+	Function parameters that are declared as constant references accept expressions as arguments
+ while pointers and non-constant references require a variable.
+	
+
+ How to convert a class to another class type in C++?
+Pre-requisite: Type Conversion in C++, Advanced C++ | Conversion Operators
+
+Through class conversion, one can assign data that belongs to a particular class type to an object that belongs to another class type.
+
+Example:
+Let there be two classes ‘A’ and ‘B’. If we want to allocate the details that belong to class ‘A’ to an object of class ‘B’ then this can be achieved by –
+
+B(object of class B) = A(object of class A)
+where ‘=’ has been overloaded for objects of class type ‘B’.
+
+Class conversion can be achieved by conversion function which is done by the use of operator overloading.
+
+Example:
+
+#include <bits/stdc++.h> 
+using namespace std; 
+  
+// Destination class, i.e 
+// Class to which another class to be converted 
+class Base { 
+    string a = "GeeksforGeeks"; 
+  
+public: 
+    // Member function which returns 
+    // string type data 
+    string get_string() 
+    { 
+        return (a); 
+    } 
+  
+    // Member function to display 
+    void display() 
+    { 
+        cout << a << endl; 
+    } 
+}; 
+  
+// Source class, i.e 
+// Class type which will be converted 
+// to the destination class type 
+class Derived { 
+    string b; 
+  
+public: 
+    // Operator overloading which accepts data 
+    // of the Destination class and 
+    // assigns those data to the source class 
+    // Here it is for the conversion of 
+    // Class_type_two to Class_type_one 
+    void operator=(Base a) 
+    { 
+        b = a.get_string(); 
+    } 
+  
+    // Member function for displaying 
+    // the data assigned to b. 
+    void display() 
+    { 
+        cout << b << endl; 
+    } 
+}; 
+  
+int main() 
+{ 
+    // Creating object of class Class_type_one 
+    Base a; 
+  
+    // Creating object of class Class_type_two 
+    Derived b; 
+  
+    // CLass type conversion 
+    // using operator overloading 
+    b = a; 
+  
+    // Displaying data of object 
+    // of class Class_type_one 
+    a.display(); 
+  
+    // Displaying data of object 
+    // of class Class_type_two 
+    b.display(); 
+  
+    return 0; 
+} 
+Output:
+GeeksforGeeks
+GeeksforGeeks
+
+
+Is assignment operator inherited?
+In C++, like other functions, assignement operator function is inherited in derived class.
+For example, in the following program, base class assignment operator function can be accessed using the derived class object.
+
+#include<iostream> 
+  
+using namespace std; 
+  
+class A { 
+ public: 
+   A & operator= (A &a) {  
+    cout<<" base class assignment operator called ";  
+    return *this; 
+   } 
+}; 
+  
+class B: public A { }; 
+  
+int main() 
+{ 
+  B a, b; 
+  a.A::operator=(b); //calling base class assignment operator function  
+                    // using derived class 
+  getchar(); 
+  return 0; 
+} 
+Output: base class assignment operator called
+
+Please write comments if you find anything incorrect, or you want to share more information about the topic discussed above.
+ 
+
+Fibonacci series C program
+Fibonacci series in C programming: C program for Fibonacci series using a loop and recursion.
+ Using the code below you can print as many terms of the series as required.
+ Numbers of this sequence are known as Fibonacci numbers. 
+The first few numbers of the series are 0, 1, 1, 2, 3, 5, 8, ...,. Except for the first two terms of the sequence, 
+
+
+every other term is the sum of the previous two terms, for example, 8 = 3 + 5 (addition of 3 and 5).
+
+
+Fibonacci series C program using a for loop
+/* Fibonacci series program in C language */
+#include <stdio.h>
+ 
+int main()
+{
+  int n, first = 0, second = 1, next, c;
+ 
+  printf("Enter the number of terms\n");
+  scanf("%d", &n);
+ 
+  printf("First %d terms of Fibonacci series are:\n", n);
+ 
+  for (c = 0; c < n; c++)
+  {
+    if (c <= 1)
+      next = c;
+    else
+    {
+      next = first + second;
+      first = second;
+      second = next;
+    }
+    printf("%d\n", next);
+  }
+ 
+  return 0;
+}
+
+C Program to Check Whether a Number is Prime or not
+Given a positive integer N. The task is to write a C program to check if the number is prime or not.
+
+Definition:
+
+A prime number is a natural number greater than 1 that has no positive divisors other than 1 and itself.
+ The first few prime numbers are {2, 3, 5, 7, 11, ….}
+
+The idea to solve this problem is to iterate through all the numbers starting from 2 to (N/2)
+ using a for loop and for every number check if it divides N. If we find any number that divides,
+ we return false. If we did not find any number between 2 and N/2 which divides N then it means that N is prime and we will return True.
+
+Below is the C program to check if a number is prime:
+
+
+// C program to check if a 
+// number is prime 
+  
+#include <stdio.h> 
+  
+int main() 
+{ 
+    int n, i, flag = 1; 
+  
+    // Ask user for input 
+    printf("Enter a number: \n"); 
+  
+    // Store input number in a variable 
+    scanf("%d", &n); 
+  
+    // Iterate from 2 to n/2 
+    for (i = 2; i <= sqrt(n) / 2; i++) { 
+  
+        // If n is divisible by any number between 
+        // 2 and n/2, it is not prime 
+        if (n % i == 0) { 
+            flag = 0; 
+            break; 
+        } 
+    } 
+  
+    if (flag == 1) { 
+        printf("%d is a prime number", n); 
+    } 
+    else { 
+        printf("%d is not a prime number", n); 
+    } 
+  
+    return 0; 
+} 
+Output:
+
+Enter a number: 11
+11 is a prime number
+
+Copy elision in C++
+Copy elision (or Copy omission) is a compiler optimization technique that avoids unnecessary copying of objects. Now a days, 
+almost every compiler uses it. Let us understand it with the help of an example.
+
+#include <iostream> 
+using namespace std; 
+   
+class B 
+{ 
+public:     
+    B(const char* str = "\0") //default constructor 
+    { 
+        cout << "Constructor called" << endl; 
+    }     
+      
+    B(const B &b)  //copy constructor 
+    { 
+        cout << "Copy constructor called" << endl; 
+    }  
+}; 
+   
+int main() 
+{  
+    B ob = "copy me";  
+    return 0; 
+} 
+The output of above program is:
+
+Constructor called
+Why copy constructor is not called?
+According to theory, when the object “ob” is being constructed, one argument constructor is used to convert “copy me” to a temporary 
+object & that temporary object is copied to the object “ob”. So the statement
+
+     B ob = "copy me"; 
+should be broken down by the compiler as
+
+     B ob = B("copy me");
+However, most of the C++ compilers avoid such overheads of creating a temporary object & then copying it.
+
+The modern compilers break down the statement
+    B ob = "copy me"; //copy initialization
+as
+    B ob("copy me"); //direct initialization
+and thus eliding call to copy constructor.
+However, if we still want to ensure that the compiler doesn’t elide the call to copy constructor
+ [disable the copy elision], we can compile the program using “-fno-elide-constructors” option with g++ and see the output as following:
+
+  
+  Constructor called
+  Copy constructor called
+If “-fno-elide-constructors” option is used, first default constructor is called to create a temporary object,
+ then copy constructor is called to copy the temporary object to ob.
+
+
+ >>>>>>  Dangling, Void , Null and Wild Pointers
+
+Dangling pointer
+
+A pointer pointing to a memory location that has been deleted (or freed) is called dangling pointer. 
+There are three different ways where Pointer acts as dangling pointer
+
+De-allocation of memory
+// Deallocating a memory pointed by ptr causes 
+// dangling pointer 
+#include <stdlib.h> 
+#include <stdio.h> 
+int main() 
+{ 
+    int *ptr = (int *)malloc(sizeof(int)); 
+  
+    // After below free call, ptr becomes a  
+    // dangling pointer 
+    free(ptr);  
+      
+    // No more a dangling pointer 
+    ptr = NULL; 
+} 
+Function Call
+
+// The pointer pointing to local variable becomes 
+// dangling when local variable is not static. 
+#include<stdio.h> 
+  
+int *fun() 
+{ 
+    // x is local variable and goes out of 
+    // scope after an execution of fun() is 
+    // over. 
+    int x = 5; 
+  
+    return &x; 
+} 
+  
+// Driver Code 
+int main() 
+{ 
+    int *p = fun(); 
+    fflush(stdin); 
+  
+    // p points to something which is not 
+    // valid anymore 
+    printf("%d", *p); 
+    return 0; 
+} 
+Output:
+
+A garbage Address
+The above problem doesn’t appear (or p doesn’t become dangling) if x is a static variable.
+
+
+
+// The pointer pointing to local variable doesn't 
+// become dangling when local variable is static. 
+#include<stdio.h> 
+
+int *fun() 
+{ 
+    // x now has scope throughout the program 
+    static int x = 5; 
+  
+    return &x; 
+} 
+  
+int main() 
+{ 
+    int *p = fun(); 
+    fflush(stdin); 
+    // Not a dangling pointer as it points 
+    // to static variable. 
+    printf("%d",*p); 
+} 
+Output:
+
+Variable goes out of scope
+void main()
+{
+   int *ptr;
+   .....
+   .....
+   {
+       int ch;
+       ptr = &ch;
+   } 
+   .....   
+   // Here ptr is dangling pointer
+}
+ 
+
+Void pointer
+
+Void pointer is a specific pointer type – void * – a pointer that points to some data location in storage, 
+which doesn’t have any specific type. Void refers to the type. 
+Basically the type of data that it points to is can be any.
+If we assign address of char data type to void pointer it will become char Pointer,
+if int data type then int pointer and so on. Any pointer type is convertible to a void pointer hence it can point to any value.
+
+Important Points
+
+void pointers cannot be dereferenced. It can however be done using typecasting the void pointer
+Pointer arithmetic is not possible on pointers of void due to lack of concrete value and thus size.
+Example:
+
+#include<stdlib.h> 
+  
+int main() 
+{ 
+    int x = 4; 
+    float y = 5.5; 
+      
+    //A void pointer 
+    void *ptr; 
+    ptr = &x; 
+  
+    // (int*)ptr - does type casting of void  
+    // *((int*)ptr) dereferences the typecasted  
+    // void pointer variable. 
+    printf("Integer variable is = %d", *( (int*) ptr) ); 
+  
+    // void pointer is now float 
+    ptr = &y;  
+    printf("\nFloat variable is= %f", *( (float*) ptr) ); 
+  
+    return 0; 
+} 
+Output:
+
+Integer variable is = 4
+Float variable is= 5.500000
+Refer void pointer article for details.
+
+ 
+
+NULL Pointer
+
+NULL Pointer is a pointer which is pointing to nothing. In case, if we don’t have address to be assigned to a pointer, then we can simply use NULL.
+
+#include <stdio.h> 
+int main() 
+{ 
+    // Null Pointer 
+    int *ptr = NULL; 
+      
+    printf("The value of ptr is %u", ptr); 
+    return 0; 
+} 
+Output :
+The value of ptr is 0
+
+Important Points:
+
+NULL vs Uninitialized pointer – An uninitialized pointer stores an undefined value. 
+A null pointer stores a defined value, but one that is defined by the environment to not be a valid address for any member or object.
+NULL vs Void Pointer – Null pointer is a value, while void pointer is a type
+ 
+
+Wild pointer
+
+A pointer which has not been initialized to anything (not even NULL) is known as wild pointer. 
+The pointer may be initialized to a non-NULL garbage value that may not be a valid address.
+
+int main() 
+{ 
+    int *p;  /* wild pointer */
+  
+    int x = 10; 
+  
+    // p is not a wild pointer now 
+    p = &x; 
+  
+    return 0; 
+} 
+
+
+C++ Files and Streams
+ 
+So far, we have been using the iostream standard library, which provides cin and cout methods for reading from standard input and writing to standard output respectively.
+
+This tutorial will teach you how to read and write from a file. This requires another standard C++ library called fstream, which defines three new data types −
+
+Sr.No	Data Type & Description
+1	
+ofstream
+
+This data type represents the output file stream and is used to create files and to write information to files.
+
+2	
+ifstream
+
+This data type represents the input file stream and is used to read information from files.
+
+3	
+fstream
+
+This data type represents the file stream generally, and has the capabilities of both ofstream and ifstream which means it can create files,
+ write information to files, and read information from files.
+
+To perform file processing in C++, header files <iostream> and <fstream> must be included in your C++ source file.
+
+Opening a File
+A file must be opened before you can read from it or write to it. Either ofstream or fstream object may be used to open a file for writing. And ifstream object 
+is used to open a file for reading purpose only.
+
+Following is the standard syntax for open() function, which is a member of fstream, ifstream, and ofstream objects.
+
+void open(const char *filename, ios::openmode mode);
+Here, the first argument specifies the name and location of the file to be opened and the second argument of the open() member function 
+defines the mode in which the file should be opened.
+
+Sr.No	Mode Flag & Description
+1	
+ios::app
+
+Append mode. All output to that file to be appended to the end.
+
+2	
+ios::ate
+
+Open a file for output and move the read/write control to the end of the file.
+
+3	
+ios::in
+
+Open a file for reading.
+
+4	
+ios::out
+
+Open a file for writing.
+
+5	
+ios::trunc
+
+If the file already exists, its contents will be truncated before opening the file.
+
+You can combine two or more of these values by ORing them together.
+For example if you want to open a file in write mode and want to truncate it in case that already exists, following will be the 
+
+syntax −
+
+ofstream outfile;
+outfile.open("file.dat", ios::out | ios::trunc );
+
+Similar way, you can open a file for reading and writing purpose as follows −
+fstream  afile;
+afile.open("file.dat", ios::out | ios::in );
+
+Closing a File
+When a C++ program terminates it automatically flushes all the streams, release all the allocated memory and close all
+ the opened files. But it is always a good practice that a programmer should close all the opened files before program termination.
+
+Following is the standard syntax for close() function, which is a member of fstream, ifstream, and ofstream objects.
+
+void close();
+Writing to a File
+While doing C++ programming, you write information to a file from your program using the stream
+ insertion operator (<<) just as you use that operator to output information to the screen.
+  The only difference is that you use an ofstream or fstream object instead of the cout object.
+
+Reading from a File
+You read information from a file into your program using the stream extraction operator (>>) 
+just as you use that operator to input information from the keyboard.
+ The only difference is that you use an ifstream or fstream object instead of the cin object.
+
+Read and Write Example
+Following is the C++ program which opens a file in reading and writing mode. After writing information entered by the user to a file named afile.dat,
+ the program reads information from the file and outputs it onto the screen −
+
+ Live Demo
+#include <fstream>
+#include <iostream>
+using namespace std;
+ 
+int main () {
+   char data[100];
+
+   // open a file in write mode.
+   ofstream outfile;
+   outfile.open("afile.dat");
+
+   cout << "Writing to the file" << endl;
+   cout << "Enter your name: "; 
+   cin.getline(data, 100);
+
+   // write inputted data into the file.
+   outfile << data << endl;
+
+   cout << "Enter your age: "; 
+   cin >> data;
+   cin.ignore();
+   
+   // again write inputted data into the file.
+   outfile << data << endl;
+
+   // close the opened file.
+   outfile.close();
+
+   // open a file in read mode.
+   ifstream infile; 
+   infile.open("afile.dat"); 
+ 
+   cout << "Reading from the file" << endl; 
+   infile >> data; 
+
+   // write the data at the screen.
+   cout << data << endl;
+   
+   // again read the data from the file and display it.
+   infile >> data; 
+   cout << data << endl; 
+
+   // close the opened file.
+   infile.close();
+
+   return 0;
+}
+When the above code is compiled and executed, it produces the following sample input and output −
+
+$./a.out
+Writing to the file
+Enter your name: Zara
+Enter your age: 9
+Reading from the file
+Zara
+9
+Above examples make use of additional functions from cin object, like getline() function
+ to read the line from outside and ignore() function to ignore the extra characters left by previous read statement.
+
+File Position Pointers
+Both istream and ostream provide member functions for repositioning the file-position pointer.
+ These member functions are seekg ("seek get") for istream and seekp ("seek put") for ostream.
+
+The argument to seekg and seekp normally is a long integer. 
+A second argument can be specified to indicate the seek direction.
+ The seek direction can be ios::beg (the default) for positioning relative to the beginning of a stream, 
+ ios::cur for positioning relative to the current position in a stream or ios::end for positioning relative to the end of a stream.
+
+The file-position pointer is an integer value that specifies the location in the file as a number of bytes from the file's starting location.
+ Some examples of positioning the "get" file-position pointer are −
+
+// position to the nth byte of fileObject (assumes ios::beg)
+fileObject.seekg( n );
+
+// position n bytes forward in fileObject
+fileObject.seekg( n, ios::cur );
+
+// position n bytes back from end of fileObject
+fileObject.seekg( n, ios::end );
+
+// position at end of fileObject
+fileObject.seekg( 0, ios::end );
+
+Const member functions in C++
+A function becomes const when const keyword is used in function’s declaration. 
+The idea of const functions is not allow them to modify the object on which they are called. 
+It is recommended practice to make as many functions const as possible so that accidental changes to objects are avoided.
+
+Following is a simple example of const function.
+
+#include<iostream> 
+using namespace std; 
+  
+class Test { 
+    int value; 
+public: 
+    Test(int v = 0) {value = v;} 
+      
+    // We get compiler error if we add a line like "value = 100;" 
+    // in this function. 
+    int getValue() const {return value;}   
+}; 
+  
+int main() { 
+    Test t(20); 
+    cout<<t.getValue(); 
+    return 0; 
+} 
+
+
+C++ Program to Find the Largest and Smallest Elements in an Array
+#include<iostream>
+using namespace std;
+int main ()
+{
+    int arr[10], n, i, max, min;
+    cout << "Enter the size of the array : ";
+    cin >> n;
+    cout << "Enter the elements of the array : ";
+    for (i = 0; i < n; i++)
+        cin >> arr[i];
+    max = arr[0];
+    for (i = 0; i < n; i++)
+    {
+        if (max < arr[i])
+            max = arr[i];
+    }
+    min = arr[0];
+    for (i = 0; i < n; i++)
+    {
+        if (min > arr[i])
+            min = arr[i];
+    }
+    cout << "Largest element : " << max;
+    cout << "Smallest element : " << min;
+    return 0;
+}
+CPP 11 features
+https://www.studytonight.com/post/cpp-11-new-features-and-concepts
+
+Mutex vs Semaphore: What’s the Difference?
+https://www.guru99.com/mutex-vs-semaphore.html
